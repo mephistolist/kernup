@@ -1,7 +1,7 @@
 # kernup
 Bash Script To Build Kernels With Debian
 
-This code is to automate the process of building kernels on Debian based systems. It has been tested on Debian Sid, Kali Linux and Devaun. If you are on a virtual machine with no EFI, you may need to edit values pertaining to this in your .config or this code my fail. The following dependancies will also be needed to use this code:
+This code is to automate the process of building kernels on Debian based systems. It will grab the source of the latest stable kernel from kernel.org and build it with the .config of kernel currently running. This has been tested on Debian Sid, Kali Linux and Devaun. If you are on a virtual machine with no EFI, you may need to edit values pertaining to this in your .config or this code my fail. The following dependancies will also be needed to use this code:
 
 rsync<br> 
 curl<br> 
