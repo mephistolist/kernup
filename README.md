@@ -22,4 +22,6 @@ You may install them with the following:
 
 sudo apt install rsync curl sudo make libncurses-dev fakeroot xz-utils build-essential flex bison bc libelf-dev libssl-dev dwarves
 
+After this you can run "chmod +x kernup" and run ./kernup to use this code.
+
 While this code has been throughly tested, we cannot shield anyone that has edited and created a bad .config file. For this reason, this code is consider as-is, with no warranty. That being said, you will need to edit your .config file before running this code for its changes to be applied. 
