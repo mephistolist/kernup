@@ -99,5 +99,8 @@ cd $CWD
 
 DPKG=$(dpkg -l | grep "linux-image-$VERSION")
 
+rsync -avP /sys/kernel/btf/vmlinux /usr/lib/modules/$VERSION/build/
+ln -sf /usr/lib/modules/$VERSION/vmlinux.xz /boot/
+
 # If package for new kernel installed, print to user or a message to trouble-shoot errors:
 if [ ! -z "$DPKG" ]; then echo -e "Kernel $VERSION is now installed.\nReboot to load this kernel into memory.\n"; else "It appears this kernel did not install successfully. You will want to re-run this program with 'kernup 2> log_name' to diagnose any problems."; fi
