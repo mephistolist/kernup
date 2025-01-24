@@ -7,7 +7,7 @@ if [ "$EUID" -ne 0 ]
 fi
 
 # Show kernel installed and newest for download:
-echo -e "The current running kernel is $(uname -r).\nVersion $(sudo -u nobody curl -sL https://www.kernel.org/ | awk '/latest_link/ { getline; print}' | perl -p -e 's/^.*?>//;s/<.*//') is the latest stable kernel."
+echo -e "The current running kernel is $(uname -r).\nVersion $(sudo -u nobody curl -sL https://www.kernel.org/ | awk -F'/' '/latest_link/{getline; sub(/.*linux-/, ""); sub(/\.tar\.xz.*/, ""); print}') is the latest stable kernel."
 
 # Ask to confirm new kernel build:
 while true; do
@@ -20,7 +20,7 @@ while true; do
 done
 
 # Get current stable:
-VERSION=$(curl -sL https://www.kernel.org/ | awk '/latest_link/{getline; print}' | cut -d '/' -f4- | awk -F'"' '{ print $1 }')
+VERSION=$(curl -sL https://www.kernel.org/ | awk -F'/' '/latest_link/{getline; sub(/.*kernel.org\//, ""); sub(/".*/, ""); print}')
 
 # Get current dir and cd to /usr/src
 CWD=$PWD
@@ -82,7 +82,7 @@ make modules
 su -c "make modules_install install"
 
 # Get version again. Seems to get lost without this.
-VERSION=$(sudo -u nobody curl -sL https://www.kernel.org/ | awk '/latest_link/ { getline; print}' | perl -p -e 's/^.*?>//;s/<.*//');
+VERSION=$(sudo -u nobody curl -sL https://www.kernel.org/ | awk -F'/' '/latest_link/{getline; sub(/.*linux-/, ""); sub(/\.tar\.xz.*/, ""); print}');
 
 # Install debs
 for i in $(ls /usr/src | awk "/$VERSION/ && /deb/" | grep -v 'dbg'); do dpkg -i /usr/src/$i; done
