@@ -20,7 +20,7 @@ while true; do
 done
 
 # Get current stable:
-VERSION=$(curl -sL https://www.kernel.org/ | awk -F'/' '/latest_link/{getline; sub(/.*kernel.org\//, ""); sub(/".*/, ""); print}')
+VERSION=$(sudo -u nobody curl -sL https://www.kernel.org/ | awk -F'/' '/latest_link/{getline; sub(/.*kernel.org\//, ""); sub(/".*/, ""); print}')
 
 # Get current dir and cd to /usr/src
 CWD=$PWD
@@ -65,8 +65,7 @@ if [ -d /sys/firmware/efi ]; then
   break 2>/dev/null
 else
   # Else comment out EFI settings in config. More may be needed in the future.
-  sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS/#CONFIG_SYSTEM_TRUSTED_KEYS/g' .config
-  sed -i 's/CONFIG_MODULE_SIG_KEY/#CONFIG_MODULE_SIG_KEY/g' .config
+  sed -i 's/CONFIG_SYSTEM_TRUSTED_KEYS/#CONFIG_SYSTEM_TRUSTED_KEYS/g;s/CONFIG_MODULE_SIG_KEY/#CONFIG_MODULE_SIG_KEY/g;' .config
 fi
 
 # Build with config with defaults
