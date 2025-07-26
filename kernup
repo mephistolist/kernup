@@ -72,7 +72,7 @@ fi
 yes "" | make oldconfig
 
 # Finish building
-nice make -n -j $(nproc) bindeb-pkg
+nice make -j $(nproc) bindeb-pkg
 
 # Make modules
 make modules
