@@ -101,6 +101,7 @@ DPKG=$(dpkg -l | grep "linux-image-$VERSION")
 # Link some modules
 rsync -avP /sys/kernel/btf/vmlinux /usr/lib/modules/$VERSION/build/
 ln -sf /usr/lib/modules/linux-$VERSION/vmlinux.xz /boot/
+mkdir /usr/src/linux-headers-$VERSION/tools/
 rsync -avP /usr/src/linux-$VERSION/tools/ /usr/src/linux-headers-$VERSION/tools/
 
 # If package for new kernel installed, print to user or a message to trouble-shoot errors:
