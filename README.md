@@ -19,11 +19,12 @@ bc
 libelf-dev
 libssl-dev
 dwarves
+libdw-dev
 ```
 
 You may install them with the following:
 
-```$ sudo apt install rsync curl sudo make libncurses-dev fakeroot debhelper xz-utils build-essential flex bison bc libelf-dev libssl-dev dwarves```
+```$ sudo apt install rsync curl sudo make libncurses-dev fakeroot debhelper xz-utils build-essential flex bison bc libelf-dev libssl-dev dwarves libdw-dev```
 
 After this you can run "chmod +x kernup" and run ./kernup to use this code.
 
