@@ -84,7 +84,7 @@ su -c "make modules_install install"
 VERSION=$(sudo -u nobody curl -sL https://www.kernel.org/ | awk -F'/' '/latest_link/{getline; sub(/.*linux-/, ""); sub(/\.tar\.xz.*/, ""); print}');
 
 # Install debs
-for i in $(ls /usr/src | grep -v dgb | awk "/$VERSION/ && /deb/"); do dpkg -i /usr/src/$i; done
+for i in $(ls /usr/src | awk '$0 !~ /dbg/ && $0 ~ /'"$VERSION"'/ && $0 ~ /deb/'); do dpkg -i /usr/src/$i; done
 
 # Remove debs
 for i in $(ls /usr/src | awk "/$VERSION/ && /changes$|buildinfo$|.deb$/"); do rm -vf /usr/src/$i; done
