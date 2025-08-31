@@ -74,6 +74,13 @@ yes "" | make oldconfig
 # Finish building
 nice make -j $(nproc) bindeb-pkg
 
+# Make for BTF
+export BTF_VERSION=$(echo $VERSION | awk -F- '{ print $2 }')
+cd tools/bpf/resolve_btfids/
+make
+cp -a resolve_btfids /usr/src/linux-headers-$BTF_VERSION/tools/bpf/resolve_btfids/
+cd -
+
 # Make modules
 make modules
 
